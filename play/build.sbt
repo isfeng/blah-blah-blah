@@ -8,4 +8,6 @@ libraryDependencies ++= Seq(
   cache
 )     
 
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "0.5.0.8"
+
 play.Project.playScalaSettings
