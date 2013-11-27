@@ -1,7 +1,8 @@
-@(message: String)
+@(user: securesocial.core.Identity)(implicit request: RequestHeader)
+@import securesocial.core.IdentityProvider
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
+    <h2>Welcome @user.firstName</h2>
 
 }
