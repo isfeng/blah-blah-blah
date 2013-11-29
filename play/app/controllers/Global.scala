@@ -1,6 +1,11 @@
 import play.api._
+import play.api.mvc.WithFilters
+import play.filters.csrf._
 
-object Global extends GlobalSettings {
+/**
+ *	http://www.playframework.com/documentation/2.2.x/ScalaCsrf
+ */
+object Global extends WithFilters(CSRFFilter()) with GlobalSettings {
 
   override def onStart(app: Application) {
     Logger.info("Application has started")

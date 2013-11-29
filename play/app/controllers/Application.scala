@@ -29,4 +29,7 @@ object Application extends Controller with securesocial.core.SecureSocial {
     Ok("")
   }
 
+  def test = Action{
+    Ok(views.html.test())
+  }
 }

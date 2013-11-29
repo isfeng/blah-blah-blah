@@ -1,0 +1,47 @@
+
+@main("Welcome to Play") {
+
+    <h2>Welcome</h2>
+    
+    <script>
+    var app_token = '';
+    var payment_id = ''; //from payment detail
+    var currency = 'TWD'; //from payment detail
+	var amount = 1;
+	
+    $(document).ready(function() {
+        $.ajax({
+            url: 'https://graph.facebook.com/' + payment_id + '?access_token=' + app_token,
+            dataType: 'json',
+            success: function(json) {
+                console.log(json);
+            },
+            error: function() {
+                alert('There was an error loading Facebook data.');
+            }
+        });
+
+        $(document).ready(function() {
+            $.ajax({
+                url: 'https://graph.facebook.com/' + payment_id +           
+                     '/refunds',
+                type: 'POST',
+                data:{
+                      access_token: app_token, 
+                      currency: currency, 
+                      amount: amount
+                     },
+                success: function(json) {
+                    console.log(json);
+                },
+                error: function(e) {
+                    var err = jQuery.parseJSON(e.responseText);
+                    console.log(err.error);
+                    alert(err.error.message);
+                }
+            });
+        });
+    });
+    </script>
+
+}
