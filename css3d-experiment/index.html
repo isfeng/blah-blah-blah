@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+	<title>try css3d</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="stylesheets/screen.css">
+	<script src="javascripts/mootools-core-1.4.5.js"></script>
+	<script src="javascripts/mootools-more-1.4.0.1.js"></script>
+	<script src="javascripts/modernizr.custom.37002.js"></script>
+</head>
+<body>
+
+	<div id="container">
+		<div id="space">
+			<div id="square">
+				<figure class="front">1</figure>
+			    <figure class="back">2</figure>
+			    <figure class="right">3</figure>
+			    <figure class="left">4</figure>
+			    <figure class="top">5</figure>
+    			<figure class="bottom">6</figure>
+			</div>	
+		</div>
+
+		<div id="control">
+			<p>
+				<label>rotateX</label>
+				<input id="rotatex" type="range" min="-360" max="360" value="0" step="1"/>
+			</p>
+			<p>
+				<label>rotateY</label>
+				<input id="rotatey" type="range" min="-360" max="360" value="0" step="1"/>
+			</p>
+			<p>
+				<label>rotateZ</label>
+				<input id="rotatez" type="range" min="-360" max="360" value="0" step="1"/>
+			</p>
+			<p>
+				<label>transform-origin-x</label>
+				<input id="tox" type="range" min="0" max="100" value="50" step="1"/>
+			</p>
+			<p>
+				<label>transform-origin-y</label>
+				<input id="toy" type="range" min="0" max="100" value="50" step="1"/>
+			</p>
+			<p>
+				<label>perspective</label>
+				<input id="perspective" type="range" min="0" max="2000" value="2000" step="1"/>
+			</p>
+		</div>
+
+		<script type="text/javascript">
+
+		window.addEvent('domready', function(){
+	
+			$('rotatex').addEvent('change', function(e){
+				$('square').setStyle(Modernizr.prefixed('transform'), 'rotateX('+$('rotatex').value+'deg) '+'rotateY('+$('rotatey').value+'deg)'+'rotateZ('+$('rotatez').value+'deg)');
+			});
+			$('rotatey').addEvent('change', function(e){
+				$('square').setStyle(Modernizr.prefixed('transform'), 'rotateX('+$('rotatex').value+'deg) '+'rotateY('+$('rotatey').value+'deg)'+'rotateZ('+$('rotatez').value+'deg)');
+			});	
+			$('rotatez').addEvent('change', function(e){
+				$('square').setStyle(Modernizr.prefixed('transform'), 'rotateX('+$('rotatex').value+'deg) '+'rotateY('+$('rotatey').value+'deg)'+'rotateZ('+$('rotatez').value+'deg)');
+			});
+			$('tox').addEvent('change', function(e){
+				$('square').setStyle(Modernizr.prefixed('transformOrigin'), $('tox').value+'% '+$('toy').value+'%');
+			});
+			$('toy').addEvent('change', function(e){
+				$('square').setStyle(Modernizr.prefixed('transformOrigin'), $('tox').value+'% '+$('toy').value+'%');
+			});
+			$('perspective').addEvent('change', function(e){
+				$('space').setStyle(Modernizr.prefixed('perspective'), $('perspective').value);
+			});	
+
+		});
+
+</script>
+</div>
+</body>
+</html>
+
+
