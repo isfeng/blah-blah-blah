@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>try rotation</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+    <script src="javascripts/Circle.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div class="canvasHolder">
+        <canvas id="testCanvas"></canvas>
+    </div>
+
+    <script>
+    
+    var canvas = document.getElementById("testCanvas");
+    var stage = new createjs.Stage(canvas);
+    var mouseX, mouseY, circles=[];
+
+    function init() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        for(var i=0;i<1000;i++){
+            var circle = new Circle(stage, {
+                x: Number.random(0, canvas.width), 
+                y: Number.random(0, canvas.height), 
+                radius: Number.random(10,50),
+                color: [Number.random(0, 255),Number.random(0, 255),Number.random(0, 255)].rgbToHex(),
+                easing: Number.random(1, 5)/500,
+                vr: Math.PI*2/Number.random(48, 192)
+            });
+            circle.draw();
+            circles.push(circle);
+        }            
+
+        stage.update();
+
+        stage.addEventListener("stagemousemove", function(evt) {
+            mouseX = evt.stageX;
+            mouseY = evt.stageY;
+        })
+
+        createjs.Ticker.addEventListener("tick", tick);
+        createjs.Ticker.setFPS(30);
+        
+    }
+
+    function tick(event) {
+        if (mouseX) {
+            circles.each(function(c){
+                c.arround(mouseX, mouseY);
+            });
+            stage.update(event);
+        }
+    }
+
+    </script>
+</body>
+</html>

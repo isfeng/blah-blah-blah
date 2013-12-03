@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>try canvas</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div class="canvasHolder">
+        <canvas id="testCanvas"></canvas>
+    </div>
+
+    <script>
+    function init() {
+        var canvas = document.getElementById("testCanvas");
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var stage = new createjs.Stage(canvas);
+        var nums = Number.random(5, 1000);
+        
+        for(var i=0;i<nums;i++){
+            var circle = new createjs.Shape();
+            var randomx = Number.random(0, canvas.width);
+            var randomy = Number.random(0, canvas.height);
+            circle.graphics.beginStroke('white').drawCircle(randomx, randomy, 30);
+            circle.graphics.beginFill("gray").drawCircle(randomx+30, randomy, 5);
+            circle.x = randomx;
+            circle.y = randomy;
+            circle.regX = randomx;
+            circle.regY = randomy;
+            circle.rotation = Number.random(0, 360);
+            stage.addChild(circle);
+        }
+
+        stage.update();
+
+        stage.addEventListener("stagemousemove",function(evt) {
+
+            var l = stage.getNumChildren();
+            for (var i=0; i<l; i++) {
+                var child = stage.getChildAt(i);
+                var dx = evt.stageX-child.x;   
+                var dy = evt.stageY-child.y;
+                var deg = Math.atan2(dy, dx);
+                child.rotation = deg * (180/Math.PI);
+            }
+            stage.update();
+        })
+
+        
+    }
+    </script>
+</body>
+</html>

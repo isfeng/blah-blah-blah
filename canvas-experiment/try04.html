@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>try canvas</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+    <script src="javascripts/Circle.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div class="canvasHolder">
+        <canvas id="testCanvas"></canvas>
+    </div>
+
+    <script>
+    
+    var canvas = document.getElementById("testCanvas");   
+    var stage = new createjs.Stage(canvas);
+
+    function init() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        for(var i=0;i<1000;i++){
+            var c = new Circle(stage, {
+                x: Number.random(0, canvas.width), 
+                y: Number.random(0, canvas.height), 
+                radius:Number.random(10,50)
+            });
+            c.draw();
+        }            
+        stage.update();
+    }
+
+    
+    </script>
+</body>
+</html>

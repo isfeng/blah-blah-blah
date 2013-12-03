@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>try drag rotation</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+    <script src="javascripts/Circle.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div class="canvasHolder">
+        drag..
+        <canvas id="testCanvas"></canvas>
+    </div>
+
+    <script>
+    
+    var canvas = document.getElementById("testCanvas");
+    var stage = new createjs.Stage(canvas);
+    var mouseX, mouseY, circles=[];
+    var isMouseDown=false;
+
+    function init() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        stage.addEventListener("stagemousemove", function(evt) {
+            mouseX = evt.stageX;
+            mouseY = evt.stageY;
+
+            if(isMouseDown){
+                 var circle = new Circle(stage, {
+                    x: mouseX, 
+                    y: mouseY, 
+                    radius: Number.random(10,50),
+                    color: [Number.random(0, 255),Number.random(0, 255),Number.random(0, 255)].rgbToHex(),
+                    easing: Number.random(1, 5)/500,
+                    vr: Math.PI*2/Number.random(48, 192)
+                });
+                circle.draw();
+                circles.push(circle);
+            }
+        })
+
+        stage.addEventListener("stagemousedown", function(evt) {
+            isMouseDown=true;        
+        })
+
+        stage.addEventListener("stagemouseup", function(evt) {
+            isMouseDown = false;
+        })
+
+        createjs.Ticker.addEventListener("tick", tick);
+        createjs.Ticker.setFPS(30);
+        
+    }
+
+    function tick(event) {
+        if (mouseX) {
+            circles.each(function(c){
+                c.arround(mouseX, mouseY);
+            });
+            stage.update(event);
+        }
+    }
+
+    </script>
+</body>
+</html>

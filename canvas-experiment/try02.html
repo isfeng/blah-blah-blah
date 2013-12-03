@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>try canvas</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div class="canvasHolder">
+        <canvas id="testCanvas"></canvas>
+    </div>
+
+    <script>
+    
+    var canvas = document.getElementById("testCanvas");
+    
+    var stage = new createjs.Stage(canvas);
+    var oldX, oldY;
+    var vr = 3;
+
+    function init() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        var nums = Number.random(5, 1000);
+        for(var i=0;i<nums;i++){
+            var circle = new createjs.Shape();
+            var randomx = Number.random(0, canvas.width);
+            var randomy = Number.random(0, canvas.height);
+            circle.graphics.beginStroke('white').drawCircle(randomx, randomy, 30);
+            circle.graphics.beginFill("black").drawCircle(randomx+30, randomy, 5);
+            circle.x = randomx;
+            circle.y = randomy;
+            circle.regX = randomx;
+            circle.regY = randomy;
+            circle.rotation = Number.random(0, 360);
+            stage.addChild(circle);
+        }
+
+        stage.update();
+
+        stage.addEventListener("stagemousemove",function(evt) {
+                oldX = evt.stageX;
+                oldY = evt.stageY;
+        })
+
+        createjs.Ticker.addEventListener("tick", tick);
+        createjs.Ticker.setFPS(30);
+
+    }
+
+    function tick(event) {
+        var l = stage.getNumChildren();
+        for (var i=0; i<l; i++) {
+            var child = stage.getChildAt(i);
+            var dx = oldX-child.x;   
+            var dy = oldY-child.y;
+            var deg = Math.round(Math.atan2(dy, dx) * (180/Math.PI));
+
+            child.rotation += Math.abs(deg-child.rotation)>=vr?(deg-child.rotation>0)?vr:-vr:0;
+        }
+        stage.update(event); // important!!
+    }
+
+
+    </script>
+</body>
+</html>
