@@ -1,0 +1,15 @@
+type("d", KEY_WIN)
+doubleClick("1380873759781.png")
+
+sleep(1)
+type("www.facebook.com\n")
+wait("1380875267046.png",60)
+click("1380875267046.png")
+
+wait("1380874639535.png",60)
+click("1380874639535.png")
+wait("1380874709720.png",60)
+click("1380874709720.png")
+wait("1380875363574.png",60)
+click("1380875363574.png")
+popup("end of test")
