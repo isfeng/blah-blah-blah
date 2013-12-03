@@ -1,0 +1,11 @@
+table th, table td{
+	width: 30px;
+	width: 100px;
+	text-align: left;
+	white-space: nowrap;
+	padding-left:10px;
+}
+
+table th{
+	border-bottom: 1px solid black;
+}

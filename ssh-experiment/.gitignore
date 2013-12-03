@@ -1,0 +1,8 @@
+build
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+*.bak

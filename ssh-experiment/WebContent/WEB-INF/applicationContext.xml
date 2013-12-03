@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/tx
+     		http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="jdbcUrl" value="jdbc:h2:~/test" />
+		<property name="user" value="sa" />
+		<property name="password" value="" />
+	</bean>
+
+	<!-- The singleton hibernate session factory -->
+	<bean id="sessionFactory" scope="singleton" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Spring's hibernate transaction manager, in charge of making hibernate sessions/txns -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- So classes/functions with @Transactional get a hibernate txn -->
+	<tx:annotation-driven />
+
+	<!-- Inject my business services class to the actions -->
+	<bean id="services" class="services.Services" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>
+

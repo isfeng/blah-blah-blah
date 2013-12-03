@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<default-action-ref name="index" />
+
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+
+	</package>
+
+	<!-- <include file="example.xml"/> -->
+
+	<package name="accounts" namespace="/accounts" extends="struts-default">
+		<action name="*" class="actions.accounts.{1}">
+			<result>/views/accounts/{1}.jsp</result>
+			<result name="redirect" type="redirect">
+				${redirectUrl}
+			</result>
+		</action>
+	</package>
+
+	<package name="session" namespace="/" extends="struts-default">
+		<action name="Login" class="actions.accounts.Login">
+			<result name="success" type="redirectAction">/accounts/Listing.action</result>
+			<result name="input">index.jsp</result>
+		</action>
+
+		<action name="Logout" class="actions.accounts.Logout">
+			<result name="success">index.jsp</result>
+		</action>
+	</package>
+
+</struts>
