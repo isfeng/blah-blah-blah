@@ -7,6 +7,8 @@ import models.Coffees
 import securesocial.core.{ Identity, Authorization }
 import views.html.defaultpages.badRequest
 import views.html.defaultpages.todo
+import views.html.refund
+import views.html.refund
 
 object Application extends Controller with securesocial.core.SecureSocial {
 
@@ -29,7 +31,18 @@ object Application extends Controller with securesocial.core.SecureSocial {
     Ok("")
   }
 
-  def test = Action{
-    Ok(views.html.test())
+  def testRefund = Action {
+    Ok(views.html.refund())
+  }
+
+  def testRequest = Action {
+    Ok(views.html.request())
+  }
+
+  def canvas = UserAwareAction { implicit request =>
+    request.user match {
+      case Some(user) => Ok(views.html.canvas(user))
+      case _ => Ok("guest")
+    }
   }
 }

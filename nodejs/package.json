@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.2.4",
-    "ejs": "*"
+    "ejs": "*",
+    "async": "*",
+    "socket.io": "*"
   }
 }

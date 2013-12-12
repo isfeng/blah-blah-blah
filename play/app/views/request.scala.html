@@ -1,0 +1,26 @@
+@main("Welcome to Play") {
+
+<h2>Welcome</h2>
+
+<script>
+
+	FB.getLoginStatus(function checkLoginStatus(response) {
+		if (response && response.status == 'connected') {
+			FB.api("/me/apprequests", "POST", {
+				"message" : "This is a test message"
+			}, function(response) {
+				console.log(response);
+				if (response && !response.error) {
+				}
+			});
+        } else {
+			console.log('not login');
+        }
+    });
+	
+	function requestCallback(arg0) {
+		console.log(arg0);
+	}
+</script>
+
+}

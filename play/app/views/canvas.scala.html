@@ -1,0 +1,7 @@
+@(user: securesocial.core.Identity)(implicit request: RequestHeader)
+@import securesocial.core.IdentityProvider
+
+@main("Welcome to Play") {
+	<h2>Facebook canvas page</h2>
+    <h2>Welcome @user.firstName</h2>
+}

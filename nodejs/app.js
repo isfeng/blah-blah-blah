@@ -7,22 +7,27 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , async = require('async');
 
 var app = express();
 
-// all environments
+// all environments 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
-app.use(express.logger('dev'));
+// For security sake, it's better to disable file upload if your application doesn't need it. 
+// app.use(express.json());
+// app.use(express.urlencoded());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.logger('dev'));
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -32,9 +37,12 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-// console.log(process.env);
-console.log(__dirname);
+var io = require('socket.io').listen(server);
+
+//console.log(process.env);
+//console.log(__dirname);
+console.log(app.routes);

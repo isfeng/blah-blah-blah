@@ -27,7 +27,12 @@ GET     /authenticate/:provider     securesocial.controllers.ProviderController.
 POST    /authenticate/:provider     securesocial.controllers.ProviderController.authenticateByPost(provider)
 GET     /not-authorized             securesocial.controllers.ProviderController.notAuthorized
 
-GET		/test						controllers.Application.test
+# Test fb
+GET		/test/fb/refund				controllers.Application.testRefund
+GET		/test/fb/request			controllers.Application.testRequest
+GET		/canvas/					controllers.Application.canvas
+POST	/canvas/					controllers.Application.canvas
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

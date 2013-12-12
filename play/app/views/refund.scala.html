@@ -4,14 +4,11 @@
     <h2>Welcome</h2>
     
     <script>
-    var app_token = '';
-    var payment_id = ''; //from payment detail
-    var currency = 'TWD'; //from payment detail
-	var amount = 1;
-	
     $(document).ready(function() {
+    	
+    	/*
         $.ajax({
-            url: 'https://graph.facebook.com/' + payment_id + '?access_token=' + app_token,
+            url: 'https://graph.facebook.com/389212407875730?access_token=634353886608224|65HMSudAfauy5EnJ3EMtzDV0JNQ',
             dataType: 'json',
             success: function(json) {
                 console.log(json);
@@ -20,11 +17,16 @@
                 alert('There was an error loading Facebook data.');
             }
         });
-
+		*/
+		
+        var app_token = '364579323556504|UcQu-kGm8gb6BKFRapIpvCeavW4';
+        var payment_id = '395658190564485'; //from payment detail
+        var currency = 'TWD'; //from payment detail
+		var amount = 316;
+		
         $(document).ready(function() {
             $.ajax({
-                url: 'https://graph.facebook.com/' + payment_id +           
-                     '/refunds',
+                url: 'https://graph.facebook.com/' + payment_id + '/refunds',
                 type: 'POST',
                 data:{
                       access_token: app_token, 
@@ -32,11 +34,11 @@
                       amount: amount
                      },
                 success: function(json) {
-                    console.log(json);
+                    alert(json);
                 },
                 error: function(e) {
                     var err = jQuery.parseJSON(e.responseText);
-                    console.log(err.error);
+                    alert(err.error);
                     alert(err.error.message);
                 }
             });
