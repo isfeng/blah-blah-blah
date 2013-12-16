@@ -1,7 +1,14 @@
-@(user: securesocial.core.Identity)(implicit request: RequestHeader)
-@import securesocial.core.IdentityProvider
+@(user: String)
 
 @main("Welcome to Play") {
 	<h2>Facebook canvas page</h2>
-    <h2>Welcome @user.firstName</h2>
+    <h2>Welcome @user</h2>
+    
+    <script>
+	    FB.getLoginStatus(function(response) {
+		    console.log(response);
+	    });
+	</script>
 }
+
+

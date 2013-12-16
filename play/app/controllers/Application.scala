@@ -41,8 +41,8 @@ object Application extends Controller with securesocial.core.SecureSocial {
 
   def canvas = UserAwareAction { implicit request =>
     request.user match {
-      case Some(user) => Ok(views.html.canvas(user))
-      case _ => Ok("guest")
+      case Some(user) => Ok(views.html.canvas(user.firstName))
+      case _ => Ok(views.html.canvas("guest"))
     }
   }
 }

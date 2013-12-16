@@ -8,7 +8,7 @@
     	
     	/*
         $.ajax({
-            url: 'https://graph.facebook.com/389212407875730?access_token=634353886608224|65HMSudAfauy5EnJ3EMtzDV0JNQ',
+            url: 'https://graph.facebook.com/389212407875730?access_token=${APP_TOKEN}',
             dataType: 'json',
             success: function(json) {
                 console.log(json);
@@ -19,8 +19,8 @@
         });
 		*/
 		
-        var app_token = '364579323556504|UcQu-kGm8gb6BKFRapIpvCeavW4';
-        var payment_id = '395658190564485'; //from payment detail
+        var app_token = '${APP_TOKEN}';
+        var payment_id = ''; //from payment detail
         var currency = 'TWD'; //from payment detail
 		var amount = 316;
 		
