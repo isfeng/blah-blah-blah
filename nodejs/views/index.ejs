@@ -3,9 +3,20 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/modernizr.js"></script>
+    <script src="/javascripts/detectizr.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    
+    <script>
+        console.log("Modernizr.Detectizr.device properties");
+        console.log(Modernizr.Detectizr.device);
+        alert(Modernizr.Detectizr.device);
+        console.log("Modernizr.Detectizr.device properties stringified");
+        console.log(JSON.stringify(Modernizr.Detectizr.device));
+        alert(JSON.stringify(Modernizr.Detectizr.device));
+    </script
   </body>
 </html>
